@@ -5,10 +5,9 @@
   $MAX_CHOICES = 5;
   
   function makeChoice($ch, $ans) {
-    $newChoice = array();
-    if (!$ch) $ch = trim($ch);
-    if (sizeof($ch) > 0) {
-        $newChoice['TEXT']      = $ch;
+    $newChoice  = array();
+    if (!empty($ch) > 0) {
+        $newChoice['TEXT'] = $ch;
         if ($ans > 0)
              $newChoice['ANSWER'] = 'YES';
         else $newChoice['ANSWER'] = 'NO';
@@ -21,15 +20,20 @@
      $newQn['QN_ID']       = $qn['QN_ID'];
      $newQn['QN_TITLE']    = $qn['QN_TITLE'];
      $newQn['QN_TEXT']     = $qn['QN_TEXT'];
-     $newQn['QN_IMG_URL']  = $qn['QN_IMG_URL'];
      $newQn['LEVEL']       = $qn['LEVEL'];
      
      $choices = array();
-     $choices['1'] = makeChoice($qn['CH1'], $qn['CH1_IS_ANS']); 
-     $choices['2'] = makeChoice($qn['CH2'], $qn['CH2_IS_ANS']);
-     $choices['3'] = makeChoice($qn['CH3'], $qn['CH3_IS_ANS']);
-     $choices['4'] = makeChoice($qn['CH4'], $qn['CH4_IS_ANS']);
-     $choices['5'] = makeChoice($qn['CH5'], $qn['CH5_IS_ANS']);
+     $theChoice = makeChoice($qn['CH1'], $qn['CH1_IS_ANS']);
+     if (!empty($theChoice)) $choices[] = $theChoice;
+     $theChoice = makeChoice($qn['CH2'], $qn['CH2_IS_ANS']);
+     if (!empty($theChoice)) $choices[] = $theChoice;
+     $theChoice = makeChoice($qn['CH3'], $qn['CH3_IS_ANS']);
+     if (!empty($theChoice)) $choices[] = $theChoice;
+     $theChoice = makeChoice($qn['CH4'], $qn['CH4_IS_ANS']);
+     if (!empty($theChoice)) $choices[] = $theChoice;
+     $theChoice = makeChoice($qn['CH5'], $qn['CH5_IS_ANS']);
+     if (!empty($theChoice)) $choices[] = $theChoice;
+     
      shuffle($choices);
      $newQn['Choices'] = $choices; 
      return $newQn;
