@@ -35,6 +35,7 @@
      if (!empty($theChoice)) $choices[] = $theChoice;
      
      shuffle($choices);
+     
      $newQn['Choices'] = $choices; 
      return $newQn;
   }
